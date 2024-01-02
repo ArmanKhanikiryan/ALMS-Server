@@ -13,11 +13,11 @@
   "routes": [
     {
       "src": "/api/auth/(.*)",
-      "dest": "./controllers/auth.route.js"
+      "dest": "./routes/auth.route.js"
     },
     {
       "src": "/api/book/(.*)",
-      "dest": "./controllers/book.route.js"
+      "dest": "./routes/book.route.js"
     },
     {
       "src": "/(.*)",

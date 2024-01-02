@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "MONGODB_URL":"mongodb+srv://haykodadyan:U6y7yVqqymfB469R@cluster0.5l2vw5h.mongodb.net/",
+    "MONGODB_URL": "mongodb+srv://haykodadyan:U6y7yVqqymfB469R@cluster0.5l2vw5h.mongodb.net/",
     "SECRET_JWT": "HAYKO_SECRET"
   },
   "builds": [
@@ -12,11 +12,16 @@
   ],
   "routes": [
     {
+      "src": "/api/auth/(.*)",
+      "dest": "./api/auth.route.js"
+    },
+    {
+      "src": "/api/book/(.*)",
+      "dest": "./api/book.route.js"
+    },
+    {
       "src": "/(.*)",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      }
+      "dest": "./index.js"
     }
   ]
 }

@@ -4,6 +4,7 @@ import cors from 'cors'
 import authRoute from "./routes/auth.route.js";
 import connectDB from "./database/database.js";
 import bookRoute from "./routes/book.route.js";
+import BookController from "./controllers/book.controller.js";
 
 const app = express()
 dotEnv.config()
@@ -15,10 +16,10 @@ app.use('/api/auth', authRoute)
 app.use('/api/book', bookRoute)
 
 
+const bookController = new BookController()
 
-app.get('/', (req, res) => {
-    res.send('Hello Hayko')
-})
+app.get('/', bookController.getAll.bind(bookController))
+
 
 
 app.listen(9999, () => {

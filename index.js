@@ -7,13 +7,14 @@ import bookRoute from "./routes/book.route.js";
 
 const app = express()
 dotEnv.config()
+connectDB()
 
 app.use(express.json())
 app.use(cors())
 app.use('/api/auth', authRoute)
 app.use('/api/book', bookRoute)
 
-connectDB()
+
 
 app.get('/', (req, res) => {
     res.send('Hello Hayko')

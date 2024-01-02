@@ -18,10 +18,6 @@
     {
       "src": "/api/book/(.*)",
       "dest": "./routes/book.route.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "./index.js"
     }
   ]
 }

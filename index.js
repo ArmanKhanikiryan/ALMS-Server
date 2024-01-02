@@ -15,6 +15,9 @@ app.use('/api/book', bookRoute)
 
 connectDB()
 
+app.get('/', (req, res) => {
+    res.send('Hello Hayko')
+})
 
 
 app.listen(9999, () => {

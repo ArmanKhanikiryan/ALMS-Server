@@ -28,8 +28,11 @@ const BookSchema = new Schema({
         page_count: Number
     },
     cover_url: String,
-    online_version_url: String
-
+    online_version_url: String,
+    loan_time: {
+        type: Number,
+        default: 0
+    }
 });
 
 export const BookModel = model('Book', BookSchema);

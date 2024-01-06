@@ -13,19 +13,23 @@
   "routes": [
     {
       "src": "/api/auth/login",
-      "dest": "routes/auth.route.js"
+      "dest": "./routes/auth.route.js"
     },
     {
       "src": "/api/auth/registration",
-      "dest": "routes/auth.route.js"
+      "dest": "./routes/auth.route.js"
     },
     {
       "src": "/api/book",
-      "dest": "routes/book.route.js"
+      "dest": "./routes/book.route.js"
     },
     {
       "src": "/api/auth/(.*)",
-      "dest": "routes/auth.route.js"
+      "dest": "./routes/auth.route.js"
+    },
+    {
+      "src": "/ver",
+      "dest": "./index.js"
     }
   ]
 }

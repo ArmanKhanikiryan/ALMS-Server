@@ -1,11 +1,26 @@
 {
   "version": 2,
   "env": {
-    "MONGODB_URL": "your_mongodb_url",
-    "SECRET_JWT": "your_secret_jwt"
+    "MONGODB_URL": "mongodb+srv://haykodadyan:U6y7yVqqymfB469R@cluster0.5l2vw5h.mongodb.net/",
+    "SECRET_JWT": "HAYKO_SECRET"
   },
-  "builds": [
-    { "src": "index.js", "use": "@vercel/node" }
+  "routes": [
+    {
+      "src": "/api/auth/(.*)",
+      "dest": "/routes/auth.route.js"
+    },
+    {
+      "src": "/api/book/(.*)",
+      "dest": "/routes/book.route.js"
+    },
+    {
+      "src": "/ver",
+      "dest": "/ver.js"
+    },
+    { "handle": "filesystem" },
+    {
+      "src": ".*",
+      "dest": "/index.js"
+    }
   ]
 }
-

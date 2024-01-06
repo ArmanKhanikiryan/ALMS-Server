@@ -1,6 +1,6 @@
 import {model, Schema} from "mongoose";
 
-const BookSchema = new Schema({
+export const BookSchema = new Schema({
     title: {
         type: String,
         required: true

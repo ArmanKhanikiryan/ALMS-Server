@@ -1,4 +1,5 @@
 import {model, Schema} from "mongoose";
+import {BookSchema} from "./book.model.js";
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -17,7 +18,8 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    books: [BookSchema]
 });
 
 export const UserModel = model('User', UserSchema)

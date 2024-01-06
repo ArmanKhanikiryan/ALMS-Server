@@ -31,7 +31,8 @@ export default class AuthService {
                 email,
                 password: hashedPassword
             })
-            return {...newUser, token}
+            const user = newUser._doc
+            return {user, token}
         }catch (e) {
             throw new Error(e)
         }

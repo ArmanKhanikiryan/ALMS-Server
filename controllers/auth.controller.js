@@ -17,8 +17,8 @@ export default class AuthController {
     async register(req, res){
         try{
             const {name, role, email, password} = req.body
-            const user = await this.AuthService.register({name, role,email,password})
-            res.status(201).json({user, message: 'Created'})
+            const {user, token} = await this.AuthService.register({name, role,email,password})
+            res.status(201).json({user, token, message: 'Created'})
         }catch (e) {
             res.status(400).json({message: 'Error in user registration'})
         }

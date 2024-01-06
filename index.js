@@ -14,7 +14,9 @@ app.use(cors())
 app.use('/api/auth', authRoute)
 app.use('/api/book', bookRoute)
 
-
+app.get('/ver', (req, res) => {
+    res.json({message: 'Darava Hke'})
+})
 
 app.listen(9999, () => {
     console.log('Running 9999')

@@ -32,6 +32,11 @@ export const BookSchema = new Schema({
     loan_time: {
         type: Number,
         default: 0
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        default: null
     }
 });
 

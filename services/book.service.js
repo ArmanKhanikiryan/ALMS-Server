@@ -47,7 +47,7 @@ export default class BookService{
             const currentTimestamp = Date.now();
             const loanPeriodMs = time * 60 * 1000;
             const resultTime = currentTimestamp + loanPeriodMs;
-            await BookModel.findByIdAndUpdate(bookId, { loan_time: resultTime, availability: false })
+            await BookModel.findByIdAndUpdate(bookId, { loan_time: resultTime, availability: false, userId: userId })
             const updatedBook = await BookModel.findById(bookId)
             const user = await UserModel.findById(userId)
             const existingBookIndex = user.books.findIndex((b) => b._id.toString() === bookId);
@@ -78,6 +78,7 @@ export default class BookService{
                 if (book) {
                     book.availability = true;
                     book.loan_time = 0;
+                    book.userId = null
                     await book.save();
                 }
             }
@@ -92,7 +93,7 @@ export default class BookService{
         try {
             const user = await UserModel.findById(userId)
             user.books = user.books.filter(elem => elem._id.toString() !== bookId)
-            await BookModel.findByIdAndUpdate(bookId, {loan_time: 0, availability: true})
+            await BookModel.findByIdAndUpdate(bookId, {loan_time: 0, availability: true, userId: null})
             await user.save()
             return user.books
         }catch (e){
@@ -107,28 +108,12 @@ export default class BookService{
                 console.log('Not admin')
                 throw new Error('Permission Denied!')
             }
-            const bookObjectId = Types.ObjectId(bookId);
-            const userWithBook = await UserModel.findOne({ books: { $in: [bookObjectId] } }).populate('books');
-            console.log(userWithBook, "MY USER")
-            // const usersWithBook = await UserModel.find({
-            //     books: { $in: [bookId] }
-            // });
-            //
-            // if (usersWithBook) {
-            //     console.log('User found:', usersWithBook);
-            // } else {
-            //     console.log('No user found with the specified book ID.');
-            // }
-            // const deleted = await BookModel.findByIdAndDelete(bookId)
-            // if(deleted){
-            //
-            // }
-            // const usersWithBook = await UserModel.find({ books: bookId });
-            // const updatePromises = usersWithBook.map(async (user) => {
-            //     user.books = user.books.filter((book) => book.toString() !== bookId);
-            //     await user.save();
-            // });
-            // await Promise.all(updatePromises);
+            const deleted = await BookModel.findOneAndDelete({ _id: bookId })
+            if(deleted.userId){
+                const userWithBook = await UserModel.findById(deleted.userId)
+                userWithBook.books = userWithBook.books.filter(elem => elem._id.toString() !== bookId)
+                await userWithBook.save()
+            }
             return 'deleted'
         }catch (e){
             console.log(e.message)

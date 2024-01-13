@@ -20,11 +20,4 @@ export default class UserService {
             throw new Error(e.message)
         }
     }
-    async changeEmail({name, role,email,password}){
-
-    }
-
-    async changeName(){
-
-    }
 }
